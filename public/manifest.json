@@ -1,0 +1,43 @@
+{
+  "name": "MicroGuard — Micro-Inversiones Seguras",
+  "short_name": "MicroGuard",
+  "description": "Invierte desde $10 USD con inteligencia artificial. Seguro, transparente y sin complicaciones.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1da86a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Mi Cartera",
+      "url": "/dashboard/portfolio",
+      "description": "Ver mi cartera de inversiones"
+    },
+    {
+      "name": "Nueva Inversión",
+      "url": "/dashboard/invest",
+      "description": "Iniciar nueva inversión"
+    }
+  ]
+}
