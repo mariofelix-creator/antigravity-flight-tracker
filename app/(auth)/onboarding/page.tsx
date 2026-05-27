@@ -106,7 +106,7 @@ export default function OnboardingPage() {
 
   const handleNext = async () => {
     if (step < 2) {
-      setStep((s) => s + 1);
+      setStep((s: number) => s + 1);
       return;
     }
 
@@ -146,7 +146,7 @@ export default function OnboardingPage() {
   };
 
   const handleBack = () => {
-    if (step > 0) setStep((s) => s - 1);
+    if (step > 0) setStep((s: number) => s - 1);
   };
 
   return (
@@ -187,7 +187,7 @@ export default function OnboardingPage() {
                   <button
                     key={amount}
                     type="button"
-                    onClick={() => setState((s) => ({ ...s, amount }))}
+                    onClick={() => setState((s: OnboardingState) => ({ ...s, amount }))}
                     className={cn(
                       "py-2.5 px-3 rounded-xl border-2 text-sm font-semibold transition-all duration-150",
                       state.amount === amount
@@ -214,8 +214,8 @@ export default function OnboardingPage() {
                 max={500}
                 step={10}
                 value={[state.amount]}
-                onValueChange={([val]) =>
-                  setState((s) => ({ ...s, amount: val ?? s.amount }))
+                onValueChange={([val]: [number]) =>
+                  setState((s: OnboardingState) => ({ ...s, amount: val ?? s.amount }))
                 }
               />
               <div className="flex justify-between text-xs text-muted-foreground">
@@ -238,7 +238,7 @@ export default function OnboardingPage() {
                   key={option.value}
                   type="button"
                   onClick={() =>
-                    setState((s) => ({ ...s, riskProfile: option.value }))
+                    setState((s: OnboardingState) => ({ ...s, riskProfile: option.value }))
                   }
                   className={cn(
                     "flex items-start gap-4 p-4 rounded-xl border-2 text-left transition-all duration-150",
@@ -292,7 +292,7 @@ export default function OnboardingPage() {
                   key={option.value}
                   type="button"
                   onClick={() =>
-                    setState((s) => ({ ...s, goal: option.value }))
+                    setState((s: OnboardingState) => ({ ...s, goal: option.value }))
                   }
                   className={cn(
                     "flex flex-col items-center gap-2 p-5 rounded-xl border-2 text-center transition-all duration-150",
