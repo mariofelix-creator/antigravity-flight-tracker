@@ -27,12 +27,8 @@ interface AssetCardProps {
 function AssetCard({ asset, onSelect }: AssetCardProps) {
   const typeColor = getAssetTypeColor(asset.type);
 
-  const riskBadgeVariant =
-    asset.risk === "low"
-      ? "info"
-      : asset.risk === "medium"
-      ? "warning"
-      : ("danger" as const);
+  const riskBadgeVariant: "info" | "warning" | "danger" =
+    asset.risk === "low" ? "info" : asset.risk === "medium" ? "warning" : "danger";
 
   return (
     <button
