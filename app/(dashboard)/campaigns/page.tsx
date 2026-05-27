@@ -116,11 +116,6 @@ export default function CampaignsPage() {
               key={campaign.id}
               campaign={campaign}
               confidenceScore={MOCK_CONFIDENCE_SCORES[campaign.id]}
-              onInvest={(id, amount) => {
-                // Server component — navigación manejada por el componente hijo (client)
-                void id;
-                void amount;
-              }}
             />
           ))}
         </div>

@@ -1,6 +1,6 @@
-import { createServerClient as createSupabaseServerClient } from "@supabase/ssr";
+import { createServerClient as createSupabaseServerClient, type CookieOptions } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
-import type { Database } from "./types";
 
 /**
  * Creates a Supabase client for Server Components, Server Actions, and API routes.
@@ -21,12 +21,12 @@ export async function createServerClient() {
 
   const cookieStore = await cookies();
 
-  return createSupabaseServerClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: Array<{ name: string; value: string; options: CookieOptions }>) {
         try {
           cookiesToSet.forEach(({ name, value, options }) => {
             cookieStore.set(name, value, options);
@@ -56,10 +56,7 @@ export async function createAdminClient() {
     );
   }
 
-  // Import supabase-js directly for the admin client (no cookie handling needed)
-  const { createClient } = await import("@supabase/supabase-js");
-
-  return createClient<Database>(supabaseUrl, serviceRoleKey, {
+  return createClient(supabaseUrl, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,

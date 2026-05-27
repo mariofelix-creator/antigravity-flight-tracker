@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import type { Database } from "@/lib/supabase/types";
+import type { Database, Campaign } from "@/lib/supabase/types";
 import { getTargetUsers, markCampaignSent, shouldSendToUser } from "@/lib/campaigns/scheduler";
 
 // Protected by admin API key — not exposed to regular users
@@ -10,7 +10,7 @@ function verifyAdminKey(request: Request): boolean {
 }
 
 function getAdminClient() {
-  return createClient<Database>(
+  return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
@@ -46,6 +46,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Campaign not found or inactive" }, { status: 404 });
     }
 
+    const typedCampaign = campaign as unknown as Campaign;
+
     // Determine target profiles
     const targetProfiles = targetAudience === "all"
       ? null
@@ -77,8 +79,8 @@ export async function POST(request: Request) {
               },
               body: JSON.stringify({
                 userId: user.user_id,
-                title: campaign.title,
-                body: campaign.description,
+                title: typedCampaign.title,
+                body: typedCampaign.description,
                 url: "/dashboard/campaigns",
                 urgent: false,
               }),
@@ -94,8 +96,8 @@ export async function POST(request: Request) {
         if (canSendInApp) {
           await supabase.from("notifications").insert({
             user_id: user.user_id,
-            title: campaign.title,
-            body: campaign.description,
+            title: typedCampaign.title,
+            body: typedCampaign.description,
             type: "offer",
             read: false,
           });

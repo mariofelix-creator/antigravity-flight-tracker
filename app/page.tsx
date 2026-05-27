@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Shield,
   Zap,
@@ -16,7 +16,7 @@ import {
 
 // ─── Animation variants ──────────────────────────────────────────────────────
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
     opacity: 1,
@@ -25,7 +25,7 @@ const fadeUp = {
   }),
 };
 
-const fadeIn = {
+const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.4 } },
 };

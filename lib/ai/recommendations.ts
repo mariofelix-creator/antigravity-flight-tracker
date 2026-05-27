@@ -4,7 +4,7 @@
  * Genera recomendaciones personalizadas con explicaciones en español simple.
  */
 
-import Anthropic from "anthropic";
+import Anthropic from "@anthropic-ai/sdk";
 import { addHours } from "date-fns";
 import type { RiskProfile, AssetType } from "@/lib/supabase/types";
 import {

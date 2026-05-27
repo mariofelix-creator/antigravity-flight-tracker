@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import webPush from "web-push";
 import { createAdminClient } from "@/lib/supabase/server";
 import { parseBody, sendNotificationSchema } from "@/lib/validations";
-import type { NotificationInsert } from "@/lib/supabase/types";
+import type { NotificationInsert, DBPushSubscription } from "@/lib/supabase/types";
 
 // Configure VAPID credentials once at module load time.
 // These values must be set in the environment; the module will throw if they
@@ -160,9 +160,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     sent_at: new Date().toISOString(),
   };
 
-  const { error: insertError } = await supabase
-    .from("notifications")
-    .insert(notificationRecord);
+  const { error: insertError } = await supabase.from("notifications").insert(notificationRecord);
 
   if (insertError) {
     // Non-fatal: the push was already sent; log but don't fail the request.

@@ -6,7 +6,7 @@ function getAdminClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error("Missing Supabase admin credentials");
-  return createClient<Database>(url, key);
+  return createClient(url, key);
 }
 
 const URGENCY_THRESHOLD_HOURS = 6;
@@ -63,8 +63,10 @@ export async function markCampaignSent(
   const supabase = getAdminClient();
   await supabase
     .from("campaign_deliveries")
-    .upsert({ user_id: userId, campaign_id: campaignId, channel })
-    .onConflict("user_id,campaign_id,channel");
+    .upsert(
+      { user_id: userId, campaign_id: campaignId, channel },
+      { onConflict: "user_id,campaign_id,channel" }
+    );
 }
 
 /** Gets users whose risk_profile matches the campaign's target_profiles */

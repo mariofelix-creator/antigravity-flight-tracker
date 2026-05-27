@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { Megaphone, Clock, TrendingUp, DollarSign, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ interface OfferCampaign {
 interface OfferCardProps {
   campaign: OfferCampaign;
   confidenceScore?: number;
-  onInvest: (campaignId: string, amount: number) => void;
+  onInvest?: (campaignId: string, amount: number) => void;
   onDismiss?: (campaignId: string) => void;
 }
 
@@ -69,12 +70,17 @@ export function OfferCard({
   onInvest,
   onDismiss,
 }: OfferCardProps) {
+  const router = useRouter();
   const { label: timeLabel, isUrgent } = getTimeRemaining(campaign.expiresAt);
   const risk = getRiskFromReturn(campaign.maxReturnPct);
   const riskClass = getRiskBadgeClass(risk);
 
   function handleInvest() {
-    onInvest(campaign.id, campaign.minInvestment);
+    if (onInvest) {
+      onInvest(campaign.id, campaign.minInvestment);
+    } else {
+      router.push(`/dashboard/invest?symbol=${campaign.assetSymbol}&amount=${campaign.minInvestment}`);
+    }
   }
 
   function handleDismiss() {

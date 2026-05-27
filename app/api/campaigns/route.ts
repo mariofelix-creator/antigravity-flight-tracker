@@ -45,11 +45,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     // If not authenticated or mismatched, we still return all active campaigns
     // without personalisation (graceful degradation).
     if (!authError && user && user.id === requestedUserId) {
-      const { data: profile, error: profileError } = await supabase
+      const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .select("risk_profile")
         .eq("user_id", user.id)
         .maybeSingle();
+
+      const profile = profileData as { risk_profile: RiskProfile | null } | null;
 
       if (!profileError && profile?.risk_profile) {
         const allowedTypes = RISK_OFFER_TYPES[profile.risk_profile];

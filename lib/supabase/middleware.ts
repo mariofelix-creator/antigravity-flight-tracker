@@ -1,6 +1,5 @@
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-import type { Database } from "./types";
 
 /**
  * Updates the Supabase session in the middleware layer.
@@ -29,12 +28,12 @@ export async function updateSession(
     request,
   });
 
-  const supabase = createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: Array<{ name: string; value: string; options: CookieOptions }>) {
         // Write cookies to both the request (for downstream server code) and
         // the response (so the browser receives the refreshed tokens).
         cookiesToSet.forEach(({ name, value }) =>

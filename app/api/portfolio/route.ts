@@ -60,10 +60,11 @@ export async function GET(): Promise<NextResponse> {
   }
 
   // Fetch all investments for this portfolio.
+  const portfolioId = (portfolio as { id: string }).id;
   const { data: investments, error: investmentError } = await supabase
     .from("investments")
     .select("*")
-    .eq("portfolio_id", portfolio.id)
+    .eq("portfolio_id", portfolioId)
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
@@ -73,8 +74,8 @@ export async function GET(): Promise<NextResponse> {
   }
 
   const result: PortfolioWithInvestments = {
-    ...portfolio,
-    investments: investments ?? [],
+    ...(portfolio as PortfolioWithInvestments),
+    investments: (investments ?? []) as Investment[],
   };
 
   return NextResponse.json({ data: result });

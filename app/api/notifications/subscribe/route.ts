@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { createServerClient } from "@/lib/supabase/server";
 import { parseBody, pushSubscriptionSchema } from "@/lib/validations";
-import type { PushSubscription } from "@/lib/supabase/types";
+import type { DBPushSubscription } from "@/lib/supabase/types";
 
 // ─── POST /api/notifications/subscribe ────────────────────────────────────────
 // Saves a Web Push subscription for the authenticated user.
@@ -39,22 +39,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   // Upsert so that re-registrations (e.g. after clearing browser data)
   // update the keys for the same endpoint rather than creating duplicates.
-  const { data: subscription, error: upsertError } = await supabase
-    .from("push_subscriptions")
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: subscription, error: upsertError } = await (supabase.from("push_subscriptions") as any)
     .upsert(
-      {
-        user_id: user.id,
-        endpoint,
-        p256dh: keys.p256dh,
-        auth: keys.auth,
-      },
-      {
-        onConflict: "user_id,endpoint",
-        ignoreDuplicates: false,
-      }
+      { user_id: user.id, endpoint, p256dh: keys.p256dh, auth: keys.auth },
+      { onConflict: "user_id,endpoint", ignoreDuplicates: false }
     )
     .select()
-    .single();
+    .single() as { data: DBPushSubscription | null; error: { message: string } | null };
 
   if (upsertError || !subscription) {
     console.error("[POST /api/notifications/subscribe]", upsertError?.message);
@@ -64,6 +56,5 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     );
   }
 
-  const result: PushSubscription = subscription;
-  return NextResponse.json({ data: result }, { status: 201 });
+  return NextResponse.json({ data: subscription }, { status: 201 });
 }

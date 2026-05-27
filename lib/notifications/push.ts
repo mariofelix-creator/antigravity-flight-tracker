@@ -1,6 +1,5 @@
 import webPush from "web-push";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/lib/supabase/types";
 
 // ─── VAPID configuration ──────────────────────────────────────────────────────
 
@@ -86,7 +85,7 @@ export async function sendPushNotification(
 export async function sendPushToUser(
   userId: string,
   payload: PushPayload,
-  supabaseServiceClient: SupabaseClient<Database>
+  supabaseServiceClient: SupabaseClient
 ): Promise<{ sent: number; failed: number }> {
   // 1. Fetch all subscriptions for the user
   const { data: subscriptions, error: fetchError } =

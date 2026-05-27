@@ -16,6 +16,7 @@ export interface Profile {
   risk_profile: RiskProfile | null;
   investment_goal: string | null;
   max_investment_usd: number;
+  onboarding_complete: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -55,6 +56,7 @@ export interface Recommendation {
   reasoning: string;
   suggested_amount: number;
   risk_level: RiskProfile;
+  expected_return_pct: number | null;
   expires_at: string;
   acted_on: boolean;
   created_at: string;
@@ -68,12 +70,13 @@ export interface Campaign {
   asset_symbol: string | null;
   min_investment: number | null;
   max_return_pct: number | null;
+  target_profiles?: RiskProfile[] | null;
   expires_at: string | null;
   is_active: boolean;
   created_at: string;
 }
 
-export interface PushSubscription {
+export interface DBPushSubscription {
   id: string;
   user_id: string;
   endpoint: string;
@@ -81,8 +84,10 @@ export interface PushSubscription {
   auth: string;
   created_at: string;
 }
+/** @deprecated use DBPushSubscription */
+export type PushSubscription = DBPushSubscription;
 
-export interface Notification {
+export interface DBNotification {
   id: string;
   user_id: string;
   title: string;
@@ -91,6 +96,8 @@ export interface Notification {
   read: boolean;
   sent_at: string;
 }
+/** @deprecated use DBNotification */
+export type Notification = DBNotification;
 
 // ─── Insert types (what we send to Supabase) ──────────────────────────────────
 
@@ -114,12 +121,13 @@ export type CampaignInsert = Omit<Campaign, "id" | "created_at"> & {
   id?: string;
 };
 
-export type PushSubscriptionInsert = Omit<PushSubscription, "id" | "created_at"> & {
+export type PushSubscriptionInsert = Omit<DBPushSubscription, "id" | "created_at"> & {
   id?: string;
 };
 
-export type NotificationInsert = Omit<Notification, "id"> & {
+export type NotificationInsert = Omit<DBNotification, "id" | "sent_at"> & {
   id?: string;
+  sent_at?: string;
 };
 
 // ─── Update types ─────────────────────────────────────────────────────────────
@@ -160,14 +168,14 @@ export interface Database {
         Update: Partial<Omit<Campaign, "id" | "created_at">>;
       };
       push_subscriptions: {
-        Row: PushSubscription;
+        Row: DBPushSubscription;
         Insert: PushSubscriptionInsert;
-        Update: Partial<Omit<PushSubscription, "id" | "user_id" | "created_at">>;
+        Update: Partial<Omit<DBPushSubscription, "id" | "user_id" | "created_at">>;
       };
       notifications: {
-        Row: Notification;
+        Row: DBNotification;
         Insert: NotificationInsert;
-        Update: Partial<Omit<Notification, "id" | "user_id">>;
+        Update: Partial<Omit<DBNotification, "id" | "user_id">>;
       };
     };
     Views: Record<string, never>;
