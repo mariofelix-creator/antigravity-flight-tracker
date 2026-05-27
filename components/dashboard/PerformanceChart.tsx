@@ -9,9 +9,6 @@ import {
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-  defs,
-  linearGradient,
-  stop,
 } from "recharts";
 import { getLastNDays, formatDateShort } from "@/lib/utils";
 
@@ -29,8 +26,7 @@ function generateMockPerformanceData(): PerformanceDataPoint[] {
   for (let i = 0; i < dates.length; i++) {
     const progress = i / (dates.length - 1);
     const trend = startValue + (endValue - startValue) * progress;
-    // Add realistic noise — larger swings mid-period
-    const noise = (Math.sin(i * 0.8) * 8) + (Math.sin(i * 0.3) * 5) - 3;
+    const noise = Math.sin(i * 0.8) * 8 + Math.sin(i * 0.3) * 5 - 3;
     const value = Math.max(startValue - 10, trend + noise);
     points.push({ date: dates[i] ?? "", value: parseFloat(value.toFixed(2)) });
   }
@@ -45,7 +41,6 @@ interface TooltipPayloadItem {
 interface CustomTooltipProps {
   active?: boolean;
   payload?: TooltipPayloadItem[];
-  label?: string;
 }
 
 function CustomTooltip({ active, payload }: CustomTooltipProps) {
