@@ -31,10 +31,12 @@ export type InvestmentInput = z.infer<typeof investmentSchema>;
 // ─── Onboarding ───────────────────────────────────────────────────────────────
 
 export const onboardingSchema = z.object({
+  // fullName is optional here — already captured during signup
   fullName: z
     .string()
     .min(2, "Full name must be at least 2 characters")
-    .max(120, "Full name must be 120 characters or fewer"),
+    .max(120, "Full name must be 120 characters or fewer")
+    .optional(),
   riskProfile: z.enum(["conservative", "moderate", "aggressive"], {
     errorMap: () => ({
       message: "Risk profile must be conservative, moderate, or aggressive",
