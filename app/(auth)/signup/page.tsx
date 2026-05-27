@@ -32,7 +32,7 @@ const signupSchema = z
       errorMap: () => ({ message: "Debes aceptar los términos y condiciones" }),
     }),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data: { password: string; confirmPassword: string }) => data.password === data.confirmPassword, {
     message: "Las contraseñas no coinciden",
     path: ["confirmPassword"],
   });
