@@ -155,7 +155,7 @@ function InvestModal({ asset, onClose }: InvestModalProps) {
             max={500}
             step={5}
             value={[amount]}
-            onValueChange={([val]) => setAmount(val ?? amount)}
+            onValueChange={([val]: [number]) => setAmount(val ?? amount)}
           />
           <div className="flex justify-between text-xs text-muted-foreground">
             <span>$10</span>
