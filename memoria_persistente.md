@@ -1,6 +1,6 @@
 # Memoria Persistente — Negocio de Investigación de Mercado E-commerce (Bolivia/Latam)
 
-> Actualizado: 2026-07-03 (Loop 1 completado)
+> Actualizado: 2026-07-03 (Loops 1 y 2 completados)
 > Propietario: Félix (felixber@gmail.com)
 > Meta: 800–2000 USD de beneficio neto en los primeros 7 días. Inversión ≤ 50 USD. 100% digital.
 
@@ -11,8 +11,8 @@
 | Loop | Objetivo | Estado |
 |------|----------|--------|
 | 1 | Validación de demanda + pricing final | ✅ Completado (2026-07-03) |
-| 2 | Assets: landing (Carrd), reporte de ejemplo, propuesta, emails | ⏳ Programado (autónomo) |
-| 3 | Setup de cobros + publicación + primeras ventas | Pendiente |
+| 2 | Assets: landing (Carrd), reporte de ejemplo, propuesta, emails, plantillas | ✅ Completado (2026-07-03) |
+| 3 | Setup de cobros + publicación en Gumroad + plan de outreach primeras ventas | ⏭️ Siguiente |
 | 4 | Optimización según respuesta real del mercado | Pendiente |
 
 ## Decisiones tomadas (Loop 1)
@@ -45,6 +45,10 @@
 - Reddit penaliza autopromoción: solo posts de valor + oferta en comentarios/DM.
 - Facturación Bolivia: emitir factura con NIT (persona natural, régimen general) vía SIAT; verificar con contador local — no somos asesores fiscales.
 
-## Próximo loop (Loop 2 — autónomo)
+## Assets generados (Loop 2)
 
-Generar: copy completo de landing para Carrd (ES), estructura+contenido de reporte de ejemplo (PDF demo), propuesta comercial de 1 página, secuencia de 5 emails de venta, guiones de DM. Actualizar esta memoria al terminar.
+Todo en `assets/`: landing Carrd (copy 9 secciones), reporte de ejemplo demo (paquete Estándar, nicho ropa deportiva Bolivia), propuesta comercial 1 página, secuencia de 5 emails, 3 plantillas Premium (tracker competidores, calculadora pricing, calendario contenido — CSV) + formulario de onboarding de 10 preguntas (en `loops/loop2-assets.md`).
+
+## Próximo loop (Loop 3)
+
+Setup de cobros paso a paso (Gumroad + PayPal + Takenos/Airtm/Payoneer → banco boliviano + facturación NIT persona natural), publicación de los 4 productos en Gumroad con descripciones listas, y plan de outreach de primeras ventas (lista de 50 objetivos + guiones). Dispara con los datos de validación que reporte el usuario (comentarios/DMs/pedidos de auditoría gratis).

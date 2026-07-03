@@ -1,0 +1,14 @@
+Concepto,Valor,Formula / Instruccion
+Costo del producto (unitario),0,Costo de compra o produccion por unidad
+Empaque,0,Bolsa + etiqueta + extras por unidad
+Envio promedio subsidiado,0,Lo que TU absorbes del envio por venta
+Comision de canal (%),0,"Mercado Libre ~13-16%, Gumroad ~10%, venta directa 0%"
+Costo de ads por venta (CAC),0,Gasto de ads del mes / ventas del mes (si no haces ads: 0)
+Costo por devolucion/cambio prorrateado,0,(Costo de un cambio x tasa de cambios) por unidad
+COSTO TOTAL,=SUMA de lo anterior,Suma de todas las filas anteriores
+Margen objetivo (%),40,Recomendado e-commerce nicho: 35-55%
+PRECIO MINIMO VIABLE,=COSTO TOTAL/(1-margen),Ej: costo 100 y margen 40% -> 100/0.6 = 166.7
+Precio del competidor mas barato,0,Del tracker de competidores
+Precio del competidor premium,0,Del tracker de competidores
+PRECIO RECOMENDADO,,"Entre tu minimo viable y el premium del mercado; ancla cerca del premium si tienes diferenciador (garantia, video, marca)"
+Precio de bundle sugerido,,2.5x el precio unitario por 3 unidades (percepcion de descuento ~17%)
