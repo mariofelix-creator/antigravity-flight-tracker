@@ -1,6 +1,6 @@
 # Memoria Persistente — Negocio de Investigación de Mercado E-commerce (Bolivia/Latam)
 
-> Actualizado: 2026-07-03 (Loops 1 y 2 completados)
+> Actualizado: 2026-07-03 (Loops 1, 2 y 3 completados)
 > Propietario: Félix (felixber@gmail.com)
 > Meta: 800–2000 USD de beneficio neto en los primeros 7 días. Inversión ≤ 50 USD. 100% digital.
 
@@ -12,8 +12,8 @@
 |------|----------|--------|
 | 1 | Validación de demanda + pricing final | ✅ Completado (2026-07-03) |
 | 2 | Assets: landing (Carrd), reporte de ejemplo, propuesta, emails, plantillas | ✅ Completado (2026-07-03) |
-| 3 | Setup de cobros + publicación en Gumroad + plan de outreach primeras ventas | ⏭️ Siguiente |
-| 4 | Optimización según respuesta real del mercado | Pendiente |
+| 3 | Setup de cobros + publicación en Gumroad + plan de outreach primeras ventas | ✅ Completado (2026-07-03) |
+| 4 | Optimización según respuesta real del mercado | ⏸️ Bloqueado: requiere datos del usuario (DMs, respuestas, ventas de las primeras 48h) |
 
 ## Decisiones tomadas (Loop 1)
 
@@ -49,6 +49,15 @@
 
 Todo en `assets/`: landing Carrd (copy 9 secciones), reporte de ejemplo demo (paquete Estándar, nicho ropa deportiva Bolivia), propuesta comercial 1 página, secuencia de 5 emails, 3 plantillas Premium (tracker competidores, calculadora pricing, calendario contenido — CSV) + formulario de onboarding de 10 preguntas (en `loops/loop2-assets.md`).
 
-## Próximo loop (Loop 3)
+## Entregables Loop 3
 
-Setup de cobros paso a paso (Gumroad + PayPal + Takenos/Airtm/Payoneer → banco boliviano + facturación NIT persona natural), publicación de los 4 productos en Gumroad con descripciones listas, y plan de outreach de primeras ventas (lista de 50 objetivos + guiones). Dispara con los datos de validación que reporte el usuario (comentarios/DMs/pedidos de auditoría gratis).
+- `loops/loop3-cobros-y-ventas.md`: guía completa de cobros Bolivia (PayPal + Gumroad payout + puente Takenos/Airtm/Binance P2P + Payoneer directo a banco + nota NIT/SIAT), plan de outreach (lista de 50 objetivos, DMs de 3 toques, metas diarias día 1–7).
+- `assets/gumroad-productos.md`: títulos, precios y descripciones listos para los 4 productos + PDF post-compra.
+
+## Próximo loop (Loop 4 — bloqueado por datos)
+
+Optimización según respuesta real: qué mensaje/canal/paquete convierte y qué matar. **Insumo necesario del usuario**: tras 24–48h de ejecución, reportar en la sesión: DMs enviados, tasa de respuesta, propuestas enviadas, ventas por paquete, objeciones más repetidas. Con eso: ajustar copy de DMs, pricing/anclaje, doblar el canal ganador y decidir si activar ads de $5/día.
+
+## Nota operativa
+
+El agendado autónomo (send_later) falló 2 veces en esta sesión por permisos no aprobables en modo no interactivo — los Loops 2 y 3 se ejecutaron inline en su lugar. El Loop 4 se dispara cuando el usuario reporte datos (o pida "Loop 4").
